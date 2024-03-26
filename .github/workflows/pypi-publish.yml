@@ -34,14 +34,19 @@ jobs:
 
   pypi-publish:
     name: ⬆️ Upload release to PyPI
+    needs:
+      - build
     runs-on: ubuntu-latest
     environment:
       name: pypi
       url: https://pypi.org/p/behaverse
     permissions:
-      id-token: write  # this is mandatory for trusted publishing
+      id-token: write  # for trusted publishing
     steps:
-    # retrieve your distributions here
-
-    - name: Publish package distributions to PyPI
+    - name: Download all the dists
+      uses: actions/download-artifact@v4
+      with:
+        name: python-package-distributions
+        path: dist/
+    - name: Publish distribution to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
