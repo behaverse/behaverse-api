@@ -5,12 +5,12 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "behaverse"
 authors = [
-    {name = "Morteza Ansarinia", email = "ansarinia@me.com"},
-    {name = "Hoorieh Afkari", email = "hoorieh.afkari@uni.lu"},
-    {name = "Pedro Cardoso-Leite", email = "pedro.cardosoleite@uni.lu"}
+    {name = "xCIT Development Team", email = "contact@xcit.org"},
 ]
 maintainers = [
     {name = "Morteza Ansarinia", email = "ansarinia@me.com"},
+    {name = "Hoorieh Afkari", email = "hoorieh.afkari@uni.lu"},
+    {name = "Pedro Cardoso-Leite", email = "pedro.cardosoleite@uni.lu"},
 ]
 readme = "README.md"
 classifiers = [
@@ -28,9 +28,9 @@ requires-python = ">=3.10"
 dynamic = ["version", "description"]
 
 [project.urls]
-homepage = "https://behaverse.org"
-documentation = "https://github.com/behaverse/data-model"
-repository = "https://github.com/behaverse/behaverse"
+Homepage = "https://behaverse.org"
+Documentation = "https://github.com/behaverse/data-model"
+Repository = "https://github.com/behaverse/behaverse"
 
 [tools.flit.module]
 name = "behaverse"
