@@ -14,19 +14,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python
+    - name: 🛠️ Set up Python
       uses: actions/setup-python@v5
       with:
         python-version: "3.x"
-    - name: Install flit
-      run: >-
-        python3 -m
-        pip install
-        flit
-        --user
-    - name: Build a binary wheel and a source tarball
+    - name: 🛠️ Install flit
+      run: python3 -m pip install flit --user
+    - name: 🛠️ Build a binary wheel and a source tarball
       run: python3 -m flit build
-    - name: Store the distribution packages
+    - name: 💾 Store the distribution packages
       uses: actions/upload-artifact@v4
       with:
         name: python-package-distributions
@@ -43,10 +39,10 @@ jobs:
     permissions:
       id-token: write  # for trusted publishing
     steps:
-    - name: Download all the dists
+    - name: ⬇️ Download the distribution packages
       uses: actions/download-artifact@v4
       with:
         name: python-package-distributions
         path: dist/
-    - name: Publish distribution to PyPI
+    - name: ⬆️ Publish distribution to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
