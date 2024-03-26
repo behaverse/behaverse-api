@@ -9,24 +9,28 @@ authors = [
     {name = "Hoorieh Afkari", email = "hoorieh.afkari@uni.lu"},
     {name = "Pedro Cardoso-Leite", email = "pedro.cardosoleite@uni.lu"}
 ]
+maintainers = [
+    {name = "Morteza Ansarinia", email = "ansarinia@me.com"},
+]
 readme = "README.md"
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 1 - Planning",
     "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering",
 ]
 requires-python = ">=3.10"
 dynamic = ["version", "description"]
 
 [project.urls]
-Home = "https://behaverse.org"
-Documentation = "https://github.com/behaverse/data-model"
-Source = "https://github.com/behaverse/behaverse"
-Tracker = "https://github.com/behaverse/behaverse/issues"
+homepage = "https://behaverse.org"
+documentation = "https://github.com/behaverse/data-model"
+repository = "https://github.com/behaverse/behaverse"
 
 [tools.flit.module]
 name = "behaverse"
@@ -38,7 +42,5 @@ ignore = [
     "W503"
 ]
 
-executionEnvironments = [
-  { root = "src" }
-]
-
+[tool.codespell]
+ignore-words-list = "behaverse, xcit, p500"
