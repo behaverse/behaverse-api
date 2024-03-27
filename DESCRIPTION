@@ -1,0 +1,13 @@
+Package: behaverse
+Title: Behaverse R Package
+Version: 0.0.1
+Depends: R (>= 4.0.0)
+Authors@R: c(
+    person("Morteza", "Ansarinia", role = c("aut", "cre"), email = "ansarinia@me.com"),
+    person("Hoorieh", "Afkari", role = c("ctb"), email = "hoorieh.afkari@uni.lu"),
+    person("Pedro Cardoso-Leite", role = c("ctb", "cph"), email= "pedro.cardosoleite@uni.lu"))
+Description: This package provides a set of functions to access and analyze xCIT Behaverse datasets.
+License: MIT + file LICENSE
+URL: https://behaverse.org, https://github.com/behaverse
+BugReports: https://github.com/behaverse/behaverse/issues
+Encoding: UTF-8
