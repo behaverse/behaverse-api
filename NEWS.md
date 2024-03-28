@@ -1,3 +1,7 @@
+## version 0.0.3
+
+Fix CRAN submission warnings.
+
 ## version 0.0.2
 
 - This fixes multiple warnings and checks in the release pipeline.
