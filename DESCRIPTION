@@ -1,15 +1,13 @@
 Package: behaverse
 Title: Access and Analyze xCIT Behaverse Datasets
-Version: 0.0.2
+Version: 0.0.3
 Depends: R (>= 4.0.0)
 Language: en-US
 Description: A set of functions to access and analyze xCIT Behaverse datasets.
 Authors@R: c(
-    person("xCIT Development Team", role = c("aut"), email = "contact@xcit.org"),
     person("Morteza", "Ansarinia", role = c("aut", "cre"), email = "ansarinia@me.com"),
     person("Hoorieh", "Afkari", role = c("ctb"), email = "hoorieh.afkari@uni.lu"),
     person("Pedro Cardoso-Leite", role = c("ctb", "cph"), email= "pedro.cardosoleite@uni.lu"))
-Author: xCIT Development Team
 Maintainer: Morteza Ansarinia <ansarinia@me.com>
 License: MIT + file LICENSE
 URL: https://behaverse.org, https://github.com/behaverse
