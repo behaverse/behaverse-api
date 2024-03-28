@@ -1,0 +1,20 @@
+---
+title: "Download P500 dataset"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Download P500 dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(behaverse)
+behaverse::download_dataset("P500")
+```

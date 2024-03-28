@@ -1,5 +1,5 @@
 Package: behaverse
-Title: Access and Analyze xCIT Behaverse Datasets
+Title: Access and Analyze 'xCIT Behaverse' Datasets
 Version: 0.0.3
 Depends: R (>= 4.0.0)
 Language: en-US
@@ -11,7 +11,11 @@ Authors@R: c(
 Maintainer: Morteza Ansarinia <ansarinia@me.com>
 License: MIT + file LICENSE
 URL: https://behaverse.org, https://github.com/behaverse
-BugReports: https://github.com/behaverse/behaverse/issues
+BugReports: https://github.com/behaverse/
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
