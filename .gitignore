@@ -1,3 +1,5 @@
 dist/
 tmp/
 *.pyc
+vignettes/*.html
+vignettes/*.pdf
