@@ -1,8 +1,8 @@
 ---
-title: "Download P500 dataset"
+title: "Download Behaverse dataset"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Download P500 dataset}
+  %\VignetteIndexEntry{Download Behaverse dataset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,9 +12,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+devtools::load_all()
 ```
 
-```{r setup}
+```{r setup, echo=FALSE}
 library(behaverse)
-behaverse::download_dataset("P500")
+
+url = 'https://uniluxembourg-my.sharepoint.com/:u:/g/personal/morteza_ansarinia_uni_lu/Ect90jSbAJBIrGNdbFqPbGUBCoH9zaeHoyvcpaKkZjSOqw?e=RUbZGh&download=1'
+
+behaverse::download_dataset(url, "../tmp/P500-L1m.tar.gz")
 ```
