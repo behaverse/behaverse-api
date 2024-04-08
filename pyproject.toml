@@ -2,6 +2,13 @@
 requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
+[tool.pytest.ini_options]
+pythonpath = "./src"
+addopts = "-ra -s"
+testpaths = [
+    "tests",
+]
+
 [project]
 name = "behaverse"
 authors = [
