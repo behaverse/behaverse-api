@@ -3,3 +3,7 @@ tmp/
 *.pyc
 vignettes/*.html
 vignettes/*.pdf
+.Rhistory
+
+cran-comments.md
+CRAN_SUBMITION

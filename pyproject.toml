@@ -42,12 +42,20 @@ Repository = "https://github.com/behaverse/behaverse"
 [tools.flit.module]
 name = "behaverse"
 
-[tool.flake8]
-max-line-length = 120
-select = "F,E,W,B,B901,B902,B903"
-ignore = [
-    "W503"
-]
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+# Add "Q" to the list of enabled codes.
+select = ["F", "Q", "E", "W", "B", "A", "N", "D"]
+ignore = []
+
+[tool.ruff.lint.flake8-quotes]
+inline-quotes = "single"
+docstring-quotes = "double"
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
 
 [tool.codespell]
 ignore-words-list = "behaverse, xcit, p500"

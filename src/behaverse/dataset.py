@@ -1,30 +1,25 @@
+"""Dataset class."""
+
 from pathlib import Path
 import requests
-import tarfile
 from tqdm.auto import tqdm
+from utils import extract_file
 
 
 class Dataset():
+    """Dataset provides methods to download and load datasets."""
 
     def __init__(self) -> None:
-        raise NotImplementedError('Dataset class instantiation is not implemented yet.')
+        """Initialize the Dataset class.
 
-    @classmethod
-    def _extract_dataset(cls, path: Path):
-        if '.tar' in path.suffixes:
-            # TODO support both .tar.* and .tar formats
-            tar = tarfile.open(path, f'r:gz')
-            # Python 3.12+ gives a deprecation warning if TarFile.extraction_filter is None.
-            if hasattr(tarfile, 'fully_trusted_filter'):
-                tar.extraction_filter = staticmethod(tarfile.fully_trusted_filter)  # type: ignore
-            tar.extractall(path.parent)
-            tar.close()
-            print(f'Extracted dataset to {path.parent.as_posix()}')
+        Raises:
+            NotImplementedError: you cannot instantiate this class. Use the class methods instead.
+        """
+        raise NotImplementedError('Dataset class instantiation is not implemented yet.')
 
     @classmethod
     def download_dataset(cls, url: str, path: Path | str, **kwargs):
         """Download dataset from the given URL."""
-
         if not url or not path:
             raise ValueError('URL and path are required.')
 
@@ -36,7 +31,7 @@ class Dataset():
 
         if path.exists():
             print(f'Dataset file already exists: {path.as_posix()}')
-            cls._extract_dataset(path)
+            extract_file(path, path.parent)
             return
 
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -48,11 +43,8 @@ class Dataset():
                 for chunk in tqdm(r.iter_content(chunk_size=chunk_size), leave=False):
                     f.write(chunk)
 
-
         print(f'Downloaded dataset to {path.as_posix()}')
-
-        cls._extract_dataset(path)
-
+        extract_file(path, path.parent)
 
     @classmethod
     def load_dataset(cls, path: Path):
