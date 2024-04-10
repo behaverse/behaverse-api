@@ -6,13 +6,16 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def extract_file(path: Path, dest: Path):
+def extract_file(path: Path, dest: Path) -> Path:
     """Extract the given tar.* file.
 
     Args;
         path: Path to the compressed tar file, e.g., with tar.gz or
                      tar.xz extension.
         dest: Destination directory to extract the file.
+
+    Returns:
+        Path: Path to the extracted directory.
 
     """
     if '.tar' not in path.suffixes:
@@ -38,3 +41,7 @@ def extract_file(path: Path, dest: Path):
     tar.close()
 
     logger.info(f'Extracted to {dest}')
+
+    output_folder = dest / tar.getnames()[0]
+
+    return output_folder
