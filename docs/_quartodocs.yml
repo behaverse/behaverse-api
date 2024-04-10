@@ -20,9 +20,10 @@ quartodoc:
 
   sections:
   - title: Dataset
-    desc: 'Dataset module for loading and validating data.'
     contents:
-      - dataset.Dataset.download
-      - dataset.Dataset.load
-      - dataset.Dataset.validate
-      - dataset.Dataset.info
+      - package: behaverse.dataset
+        name: Dataset
+        children: separate
+      - package: behaverse.dataset_info
+        name: DatasetInfo
+        children: separate
