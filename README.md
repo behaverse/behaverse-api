@@ -14,6 +14,26 @@ pip install behaverse
 
 TODO
 
+## Development
+
+Before starting development, you need to install the dependencies:
+
+```bash
+mamba env create -f environment.yml
+mamba activate behaverse
+```
+
+### Documentation
+
+To generate documentations and API reference, run the following commands from the main directory of the project:
+
+```bash
+quartodoc build --config docs/_quartodocs.yml
+quarto render docs
+```
+
+The documentation will be available in the `docs/_site/` directory.
+
 ## License
 
 TODO

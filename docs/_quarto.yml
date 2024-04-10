@@ -1,0 +1,17 @@
+project:
+  title: Behaverse
+  type: website
+  execute-dir: project
+
+execute:
+  enabled: false
+
+website:
+  navbar:
+    left:
+      - api/index.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true

@@ -1,0 +1,28 @@
+
+# tell quarto to read the generated sidebar
+metadata-files:
+  - api/_sidebar.yml
+
+interlinks:
+ sources:
+    python:
+      url: https://docs.python.org/3/
+
+quartodoc:
+  package: behaverse
+  dir: api
+  source_dir: src
+  parser: 'google'
+  title: "API"
+
+  # # write sidebar data to this file
+  sidebar: api/_sidebar.yml
+
+  sections:
+  - title: Dataset
+    desc: 'Dataset module for loading and validating data.'
+    contents:
+      - dataset.Dataset.download
+      - dataset.Dataset.load
+      - dataset.Dataset.validate
+      - dataset.Dataset.info

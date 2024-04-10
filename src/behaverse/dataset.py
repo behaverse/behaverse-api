@@ -59,7 +59,15 @@ class Dataset():
 
     @classmethod
     def load(cls, path: Path) -> 'Dataset':
-        """Load the dataset from the given path."""
+        """Load the dataset from the given path.
+
+        Args:
+            path (Path): the path to the dataset file.
+
+        Raises:
+            FileNotFoundError: if the dataset directory does not exist.
+
+        """
         if not path.exists():
             raise FileNotFoundError(f'File not found: {path}')
 
@@ -68,9 +76,7 @@ class Dataset():
     def validate(self) -> bool:
         """Simple validations to check if the dataset is valid and consistent.
 
-        Violations will be logged as errors.
-
-        Validation rules:
+        Violations will be logged as errors. Validation rules include:
             - The dataset path should exist.
             - TODO add more rules here.
 

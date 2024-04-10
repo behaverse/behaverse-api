@@ -9,5 +9,12 @@ dependencies:
   - pip
   - ruff
   - pytest
+
   - tqdm
+
+  # packaging
   - flit
+
+  # documentation
+  - quarto
+  - quartodoc

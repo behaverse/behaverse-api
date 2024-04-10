@@ -7,3 +7,6 @@ vignettes/*.pdf
 
 cran-comments.md
 CRAN_SUBMITION
+
+.ruff_cache/
+
