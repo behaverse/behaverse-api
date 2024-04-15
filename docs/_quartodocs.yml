@@ -19,11 +19,22 @@ quartodoc:
   sidebar: api/_sidebar.yml
 
   sections:
-  - title: Dataset
+  - title: Object-Oriented API
+    package: behaverse
     contents:
-      - package: behaverse.dataset
-        name: Dataset
+      - name: Dataset
         children: separate
-      - package: behaverse.dataset_info
-        name: DatasetInfo
+        members:
+          - download
+          - load
+          - validate
+      - name: DatasetInfo
         children: separate
+  - title: Functional API
+    package: behaverse
+    contents:
+      - list_datasets
+      - download_dataset
+      - load_dataset
+      - get_dataset_info
+      - validate_dataset
