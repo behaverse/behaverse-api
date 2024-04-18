@@ -7,18 +7,29 @@ This module provides a functional interface to interact with datasets.
 from .dataset import Dataset
 from .dataset_info import DatasetInfo
 from pathlib import Path
+import pandas as pd
 import logging
 logger = logging.getLogger(__name__)
 
 
-def list_datasets() -> list[Dataset]:
+def list_datasets() -> pd.DataFrame:
     """List available datasets.
 
     Returns:
-        list: List of available datasets.
+        DataFrame: List of available datasets including name, description, and url.
 
     """
-    raise NotImplementedError('Not implemented yet.')
+    # use requests to get the list of datasets and parse it using yaml
+    import requests
+    import yaml
+    url = 'https://morteza.github.io/datasets/behaverse.yml'
+    response = requests.get(url)
+    if response.status_code == 200:
+        datasets = pd.DataFrame(yaml.safe_load(response.text))
+        return datasets
+    else:
+        logger.error(f'Failed to get the list of datasets from {url}.')
+        raise Exception(f'Failed to get the list of datasets from {url}.')
 
 
 def download_dataset(name: str, dest: Path | str) -> Path:

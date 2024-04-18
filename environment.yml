@@ -15,6 +15,9 @@ dependencies:
   # packaging
   - flit
 
+  # data
+  - pandas
+
   # documentation
   - quarto
   - quartodoc

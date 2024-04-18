@@ -3,7 +3,7 @@
 from pathlib import Path
 import requests
 from tqdm.auto import tqdm
-from utils import extract_file
+from .utils import extract_file
 from .dataset_info import DatasetInfo
 import logging
 logger = logging.getLogger(__name__)
