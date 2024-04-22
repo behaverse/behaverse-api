@@ -46,7 +46,7 @@ quartodoc:
           - download
           - load
           - validate
-      - name: DatasetInfo
+      - name: DatasetDescription
         children: separate
   - title: Functional API
     package: behaverse
@@ -54,5 +54,5 @@ quartodoc:
       - list_datasets
       - download_dataset
       - load_dataset
-      - get_dataset_info
+      - describe_dataset
       - validate_dataset

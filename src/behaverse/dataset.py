@@ -4,7 +4,7 @@ from pathlib import Path
 import requests
 from tqdm.auto import tqdm
 from .utils import extract_file
-from .dataset_info import DatasetInfo
+from .dataset_description import DatasetDescription
 import logging
 logger = logging.getLogger(__name__)
 
@@ -36,7 +36,7 @@ class Dataset():
         self.path = path
 
         # TODO add dataset-level attributes
-        self.info = DatasetInfo()
+        self.info = DatasetDescription()
         self.subjects = ...
         self.study_flow = ...
         self.data = ...

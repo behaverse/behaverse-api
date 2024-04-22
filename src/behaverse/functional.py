@@ -5,7 +5,7 @@ This module provides a functional interface to interact with datasets.
 """
 
 from .dataset import Dataset
-from .dataset_info import DatasetInfo
+from .dataset_description import DatasetDescription
 from pathlib import Path
 import pandas as pd
 import logging
@@ -60,7 +60,7 @@ def load_dataset(name: str, **kwargs) -> Dataset:
     raise NotImplementedError('Not implemented yet.')
 
 
-def get_dataset_info(name: str) -> DatasetInfo:
+def describe_dataset(name: str) -> DatasetDescription:
     """Describe the dataset with the given name.
 
     Args:
