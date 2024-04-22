@@ -6,3 +6,8 @@ inst/doc
 dist/
 tmp/
 *.pyc
+
+# Ignore files specific to the Python branch
+docs/
+.pytest_cache/
+src/behaverse/
