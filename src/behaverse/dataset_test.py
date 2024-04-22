@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from behaverse.dataset import Dataset
+from .dataset import Dataset
 
 
 def test_download_dataset_from_onedrive():

@@ -31,17 +31,16 @@ def extract_file(path: Path, dest: Path) -> Path:
         logger.info(f'Destination directory created: {dest}')
 
     # TODO support both .tar.* and .tar formats
-    ext = path.suffixes[-1]
+    ext = path.suffixes[-1].replace('.', '')
     tar = tarfile.open(path, f'r:{ext}')
     # Python 3.12+ gives a deprecation warning if TarFile.extraction_filter is None.
     if hasattr(tarfile, 'fully_trusted_filter'):
         tar.extraction_filter = staticmethod(tarfile.fully_trusted_filter)  # type: ignore
 
     tar.extractall(dest)
+    output_folder = dest / tar.getnames()[0]
     tar.close()
 
     logger.info(f'Extracted to {dest}')
-
-    output_folder = dest / tar.getnames()[0]
 
     return output_folder

@@ -3,7 +3,7 @@
 from pathlib import Path
 import requests
 from tqdm.auto import tqdm
-from utils import extract_file
+from .utils import extract_file
 from .dataset_info import DatasetInfo
 import logging
 logger = logging.getLogger(__name__)
@@ -56,7 +56,7 @@ class Dataset():
         if not url or not dest:
             raise ValueError('URL and path are required.')
 
-        chunk_size = kwargs.get('chunk_size', 8192)
+        chunk_size = kwargs.get('chunk_size', 8096)
 
         if isinstance(dest, str):
             dest = Path(dest)
@@ -72,7 +72,7 @@ class Dataset():
             r.raise_for_status()
 
             with open(dest, 'wb') as f:
-                for chunk in tqdm(r.iter_content(chunk_size=chunk_size), leave=False):
+                for chunk in tqdm(r.iter_content(chunk_size=chunk_size), leave=False, unit='B'):
                     f.write(chunk)
 
         output_path = extract_file(dest, dest.parent)

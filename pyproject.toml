@@ -3,11 +3,10 @@ requires = ["flit_core >=3.2,<4"]
 build-backend = "flit_core.buildapi"
 
 [tool.pytest.ini_options]
-pythonpath = "./src"
+pythonpath = "src"
 addopts = "-ra -s"
-testpaths = [
-    "tests",
-]
+testpaths = ["src", "tests"]
+python_files = ["*_test.py", "test_*.py", "tests.py", "test.py"]
 
 [project]
 name = "behaverse"
