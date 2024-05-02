@@ -3,20 +3,19 @@
 from pathlib import Path
 import requests
 from tqdm.auto import tqdm
-from .utils import extract_file
 from .dataset_description import DatasetDescription
 import logging
 logger = logging.getLogger(__name__)
 
 
 class Dataset():
-    """Dataset provides methods to download and load datasets.
+    """Dataset provides methods to load and describe datasets.
 
     :::{.callout-note}
 
     Notes:
         You cannot manually instantiate this class. Use the class methods instead, e.g.
-        `Dataset.download()` or `Dataset.load()`. You can also pass additional
+        `Dataset.load()`. You can also pass additional
         `allow_instantiation=True` to bypass this restriction.
     :::
 
@@ -43,41 +42,6 @@ class Dataset():
         self.response = ...
         self.stimulus = ...
         self.option = ...
-
-    @classmethod
-    def download(cls, url: str, dest: Path | str, **kwargs) -> Path:
-        """Download dataset from the given URL.
-
-        Args:
-            url: the URL to download the dataset from.
-            dest: the path to save the dataset file.
-            kwargs (dict): additional arguments.
-        """
-        if not url or not dest:
-            raise ValueError('URL and path are required.')
-
-        chunk_size = kwargs.get('chunk_size', 8096)
-
-        if isinstance(dest, str):
-            dest = Path(dest)
-
-        if dest.exists():
-            logger.warning(f'Dataset file already exists: {dest.as_posix()}')
-            extract_file(dest, dest.parent)
-            return dest
-
-        dest.parent.mkdir(parents=True, exist_ok=True)
-
-        with requests.get(url, stream=True) as r:
-            r.raise_for_status()
-
-            with open(dest, 'wb') as f:
-                for chunk in tqdm(r.iter_content(chunk_size=chunk_size), leave=False, unit='B'):
-                    f.write(chunk)
-
-        output_path = extract_file(dest, dest.parent)
-        logger.info(f'Extracted dataset to {output_path}')
-        return output_path
 
     @classmethod
     def load(cls, path: Path | str) -> 'Dataset':

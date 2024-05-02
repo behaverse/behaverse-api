@@ -1,12 +1,14 @@
 """Generic utility functions."""
 
 from pathlib import Path
+from tqdm.auto import tqdm
+import requests
 import tarfile
 import logging
 logger = logging.getLogger(__name__)
 
 
-def extract_file(path: Path, dest: Path) -> Path:
+def extract_dataset(path: Path, dest: Path) -> Path:
     """Extract the given tar.* file.
 
     Args;
@@ -44,3 +46,38 @@ def extract_file(path: Path, dest: Path) -> Path:
     logger.info(f'Extracted to {dest}')
 
     return output_folder
+
+
+def download_dataset(url: str, dest: Path | str, **kwargs) -> Path:
+    """Download dataset from the given URL.
+
+    Args:
+        url: the URL to download the dataset from.
+        dest: the path to save the dataset file.
+        kwargs (dict): additional arguments.
+    """
+    if not url or not dest:
+        raise ValueError('URL and path are required.')
+
+    chunk_size = kwargs.get('chunk_size', 8096)
+
+    if isinstance(dest, str):
+        dest = Path(dest)
+
+    if dest.exists():
+        logger.warning(f'Dataset file already exists: {dest.as_posix()}')
+        extract_dataset(dest, dest.parent)
+        return dest
+
+    dest.parent.mkdir(parents=True, exist_ok=True)
+
+    with requests.get(url, stream=True) as r:
+        r.raise_for_status()
+
+        with open(dest, 'wb') as f:
+            for chunk in tqdm(r.iter_content(chunk_size=chunk_size), leave=False, unit='B'):
+                f.write(chunk)
+
+    output_path = extract_file(dest, dest.parent)
+    logger.info(f'Extracted dataset to {output_path}')
+    return output_path

@@ -43,7 +43,6 @@ quartodoc:
       - name: Dataset
         children: separate
         members:
-          - download
           - load
           - validate
       - name: DatasetDescription
@@ -52,7 +51,11 @@ quartodoc:
     package: behaverse
     contents:
       - list_datasets
-      - download_dataset
       - load_dataset
       - describe_dataset
       - validate_dataset
+  - title: Utilities
+    package: behaverse.utils
+    contents:
+      - download_dataset
+      - extract_dataset

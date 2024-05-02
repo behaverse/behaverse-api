@@ -32,20 +32,6 @@ def list_datasets() -> pd.DataFrame:
         raise Exception(f'Failed to get the list of datasets from {url}.')
 
 
-def download_dataset(name: str, dest: Path | str) -> Path:
-    """Download the dataset with the given name.
-
-    Args:
-        name: Name of the dataset to download.
-        dest: Destination path to save the dataset.
-
-    Returns:
-        Path: Path to the downloaded dataset.
-
-    """
-    raise NotImplementedError('Not implemented yet.')
-
-
 def load_dataset(name: str, **kwargs) -> Dataset:
     """Load the dataset with the given name.
 
