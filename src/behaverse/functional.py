@@ -22,7 +22,7 @@ def list_datasets() -> pd.DataFrame:
     # use requests to get the list of datasets and parse it using yaml
     import requests
     import yaml
-    url = 'https://morteza.github.io/datasets/behaverse.yml'
+    url = 'https://edu.lu/g3988'  # short url for the list of URLs
     response = requests.get(url)
     if response.status_code == 200:
         datasets = pd.DataFrame(yaml.safe_load(response.text))
