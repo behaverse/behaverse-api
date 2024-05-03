@@ -42,7 +42,7 @@ class Dataset():
 
         # TODO add dataset-level attributes
         # TODO move time-consuming operations to methods and/or lazy load
-        self.info = DatasetDescription()
+        self.description = DatasetDescription()
 
         # SECTION subjects table
         self.subjects = pd.read_csv(self.db_path / 'subjects.csv')
@@ -106,6 +106,10 @@ class Dataset():
             download_dataset(name)
 
         return cls(name, allow_instantiation=True)
+
+    def describe(self) -> DatasetDescription:
+        """Provides metadata and information card for the dataset."""
+        return self.description
 
     def validate(self) -> bool:
         """Simple validations to check if the dataset is valid and consistent.
