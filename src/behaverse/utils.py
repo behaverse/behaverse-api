@@ -2,39 +2,41 @@
 
 from pathlib import Path
 from tqdm.auto import tqdm
+import pandas as pd
 import requests
 import tarfile
+from .functional import list_datasets
 import logging
 logger = logging.getLogger(__name__)
 
 
-def extract_dataset(path: Path, dest: Path) -> Path:
-    """Extract the given tar.* file.
+def extract_dataset(name: str, **kwargs) -> Path:
+    """Extract a dataset and return the path to the extracted directory.
 
-    Args;
-        path: Path to the compressed tar file, e.g., with tar.gz or
-                     tar.xz extension.
-        dest: Destination directory to extract the file.
+    Args:
+        name: Name of the datasets, e.g., `P500` for a compressed file of the name
+              `P500.tar.gz`.
+        kwargs (dict): Additional arguments, including `dest` which is the
+                       destination directory to extract the file. Defaults to (i.e.,
+                       `~/.behaverse/datasets/{name}/`).
 
     Returns:
         Path: Path to the extracted directory.
 
     """
-    if '.tar' not in path.suffixes:
-        raise ValueError('Only .tar files are supported.')
+    src = Path.home() / '.behaverse' / 'datasets' / f'{name}.tar.gz'
+    if not src.exists():
+        raise FileNotFoundError(f'{src} not found.')
 
-    if dest is None:
-        dest = path.parent
-        logger.info('Destination path is not provided.'
-                    'Extracting to the parent directory.')
+    dest = Path(kwargs.get('dest', Path.home() / '.behaverse' / 'datasets'))
 
     if not dest.exists():
         dest.mkdir(parents=True, exist_ok=True)
-        logger.info(f'Destination directory created: {dest}')
+        logger.info(f'Destination directory created: {dest.parent}')
 
     # TODO support both .tar.* and .tar formats
-    ext = path.suffixes[-1].replace('.', '')
-    tar = tarfile.open(path, f'r:{ext}')
+    ext = src.suffixes[-1].replace('.', '')
+    tar = tarfile.open(src, f'r:{ext}')
     # Python 3.12+ gives a deprecation warning if TarFile.extraction_filter is None.
     if hasattr(tarfile, 'fully_trusted_filter'):
         tar.extraction_filter = staticmethod(tarfile.fully_trusted_filter)  # type: ignore
@@ -42,32 +44,32 @@ def extract_dataset(path: Path, dest: Path) -> Path:
     tar.extractall(dest)
     output_folder = dest / tar.getnames()[0]
     tar.close()
-
-    logger.info(f'Extracted to {dest}')
+    logger.info(f'Extracted to {output_folder}')
 
     return output_folder
 
 
-def download_dataset(url: str, dest: Path | str, **kwargs) -> Path:
+def download_dataset(name: str, **kwargs) -> Path:
     """Download dataset from the given URL.
 
     Args:
-        url: the URL to download the dataset from.
-        dest: the path to save the dataset file.
-        kwargs (dict): additional arguments.
+        name: the name of the dataset to download.
+        kwargs (dict): additional arguments. For example you can specify the destination
+                        path (`dest`) to save the dataset file. Defaults to
+                        `~/.behaverse/datasets/{name}/`. Or `chunk_size` to specify the chunk size for downloading.
     """
-    if not url or not dest:
-        raise ValueError('URL and path are required.')
+    assert name is not None, 'Dataset name is required.'
 
+    datasets: pd.DataFrame = list_datasets()
+    # query datasets for the url of a row with the given name
+    url = datasets[datasets['name'] == name]['url'].values[0]
+
+    dest = Path(kwargs.get('dest',
+                           Path.home() / '.behaverse' / 'datasets' / f'{name}.tar.gz'))
     chunk_size = kwargs.get('chunk_size', 8096)
 
-    if isinstance(dest, str):
-        dest = Path(dest)
-
     if dest.exists():
-        logger.warning(f'Dataset file already exists: {dest.as_posix()}')
-        extract_dataset(dest, dest.parent)
-        return dest
+        return extract_dataset(name)
 
     dest.parent.mkdir(parents=True, exist_ok=True)
 
@@ -75,9 +77,13 @@ def download_dataset(url: str, dest: Path | str, **kwargs) -> Path:
         r.raise_for_status()
 
         with open(dest, 'wb') as f:
-            for chunk in tqdm(r.iter_content(chunk_size=chunk_size), leave=False, unit='B'):
+            for chunk in tqdm(r.iter_content(chunk_size=chunk_size),
+                              leave=False,
+                              unit='B'):
                 f.write(chunk)
 
-    output_path = extract_file(dest, dest.parent)
+    logger.info(f'Downloaded dataset to {dest}, now extracting...')
+
+    output_path = extract_dataset(name)
     logger.info(f'Extracted dataset to {output_path}')
     return output_path
