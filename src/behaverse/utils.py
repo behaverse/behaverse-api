@@ -5,9 +5,28 @@ from tqdm.auto import tqdm
 import pandas as pd
 import requests
 import tarfile
-from .functional import list_datasets
 import logging
 logger = logging.getLogger(__name__)
+
+
+def list_datasets() -> pd.DataFrame:
+    """List available datasets.
+
+    Returns:
+        DataFrame: List of available datasets including name, description, and url.
+
+    """
+    # use requests to get the list of datasets and parse it using yaml
+    import requests
+    import yaml
+    url = 'https://edu.lu/g3988'  # short url for the list of URLs
+    response = requests.get(url)
+    if response.status_code == 200:
+        datasets = pd.DataFrame(yaml.safe_load(response.text))
+        return datasets
+    else:
+        logger.error(f'Failed to get the list of datasets from {url}.')
+        raise Exception(f'Failed to get the list of datasets from {url}.')
 
 
 def extract_dataset(name: str, **kwargs) -> Path:
