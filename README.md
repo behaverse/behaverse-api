@@ -12,7 +12,9 @@ pip install behaverse
 
 ## Usage
 
-TODO
+See the [documentation](https://behaverse.github.io/) for more information on how to use the package.
+
+
 
 ## Development
 
@@ -28,7 +30,7 @@ mamba activate behaverse
 To generate documentations and API reference, run the following commands from the main directory of the project:
 
 ```bash
-quartodoc build --config docs/_quartodocs.yml
+quartodoc build --config docs/_quarto.yml
 quarto render docs
 ```
 
