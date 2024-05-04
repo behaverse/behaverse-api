@@ -21,7 +21,7 @@ def load_dataset(name: str, **kwargs) -> Dataset:
         Dataset: Loaded dataset.
 
     """
-    return Dataset.load(name, **kwargs)
+    return Dataset.load_all(name, **kwargs)
 
 
 def describe_dataset(name: str) -> DatasetDescription:
@@ -34,7 +34,7 @@ def describe_dataset(name: str) -> DatasetDescription:
         DatasetDescription: Metadata and description of the dataset.
 
     """
-    return Dataset.load(name).describe()
+    return Dataset.load_all(name).describe()
 
 
 def validate_dataset(name: str) -> bool:

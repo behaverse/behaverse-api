@@ -23,7 +23,7 @@ def test_load_dataset():
     """Load a behaverse dataset."""
     from .dataset import Dataset
 
-    dataset = Dataset.load('P500-L1m')
+    dataset = Dataset.load_all('P500-L1m')
 
     assert dataset.name == 'P500-L1m'
     assert len(dataset.subjects) > 0
