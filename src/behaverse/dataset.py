@@ -21,7 +21,8 @@ class Dataset():
     :::
 
     Args:
-        path (Path): the path to the dataset file.
+        name (str): the name to the dataset file. Use
+        [](`~behaverse.list_datasets`) to see available datasets.
         kwargs (dict): additional arguments.
 
     Raises:
@@ -85,9 +86,29 @@ class Dataset():
         self.option = ...
         # !SECTION option table
 
+    def select(self) -> 'Dataset':
+        """Filter the dataset given some selectors."""
+        raise NotImplementedError('Not implemented yet.')
+
+    def load(self, name: str, download: bool = True) -> 'Dataset':
+        """Load the dataset with the given name.
+
+        Args:
+            name: Name of the dataset to load.
+            download: whether to download the dataset if it does not exist.
+
+        Raises:
+            NotImplementedError: if the method is not implemented yet.
+
+        """
+        raise NotImplementedError('Not implemented yet.')
+
     @classmethod
-    def load(cls, name: str, download: bool = True) -> 'Dataset':
-        """Load the dataset from the given path.
+    def load_all(cls, name: str, download: bool = True) -> 'Dataset':
+        """Load the full dataset, given its name.
+
+        Notes:
+            This is a slow operation and should be used with caution.
 
         Args:
             name: the name to the dataset file. See `list_datasets()` for available

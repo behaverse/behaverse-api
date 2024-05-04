@@ -30,8 +30,10 @@ mamba activate behaverse
 To generate documentations and API reference, run the following commands from the main directory of the project:
 
 ```bash
-quartodoc build --config docs/_quarto.yml
-quarto render docs
+cd docs
+quartodoc build
+quartodoc interlinks
+quarto preview
 ```
 
 The documentation will be available in the `docs/_site/` directory.

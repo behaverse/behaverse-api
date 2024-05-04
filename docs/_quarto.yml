@@ -11,27 +11,31 @@ website:
     left:
       - api/index.qmd
 
+interlinks:
+  fast: true
+  sources:
+    pandas:
+      url: https://pandas.pydata.org/docs/
+
 format:
   html:
     theme: cosmo
     toc: true
 
+filters:
+  - interlinks
 
 # tell quarto to read the generated sidebar
 metadata-files:
   - api/_sidebar.yml
 
-interlinks:
- sources:
-    python:
-      url: https://docs.python.org/3/
-
 quartodoc:
   package: behaverse
   dir: api
-  source_dir: src
+  source_dir: ../src
   parser: 'google'
   title: "API"
+  render_interlinks: true
 
   # # write sidebar data to this file
   sidebar: api/_sidebar.yml
@@ -43,7 +47,10 @@ quartodoc:
       - name: Dataset
         children: separate
         members:
+          - load_all
           - load
+          - describe
+          - select
           - validate
       - name: DatasetDescription
         children: separate
