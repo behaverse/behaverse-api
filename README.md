@@ -31,9 +31,7 @@ To generate documentations and API reference, run the following commands from th
 
 ```bash
 cd docs
-quartodoc build
-quartodoc interlinks
-quarto preview
+quartodoc build && quartodoc interlinks && quarto preview
 ```
 
 The documentation will be available in the `docs/_site/` directory.

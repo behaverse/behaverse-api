@@ -1,8 +1,10 @@
 """Dataset class."""
 
+import re
 from pathlib import Path
 import pandas as pd
 from tqdm.auto import tqdm
+from typing import Any
 from .utils import download_dataset
 from .dataset_description import DatasetDescription
 import logging
@@ -46,7 +48,8 @@ class Dataset():
         self.description = DatasetDescription()
 
         # SECTION subjects table
-        self.subjects = pd.read_csv(self.db_path / 'subjects.csv')
+        self.subjects = pd.read_csv(self.db_path / 'subjects.csv',
+                                    dtype={'subject_id': str})
         # !SECTION subjects table
 
         # SECTION study flow table
@@ -57,6 +60,67 @@ class Dataset():
              for f in study_flow_files], axis=0, ignore_index=True)
         # !SECTION study flow table
 
+    def select(self, **selector_kwargs: Any) -> 'Dataset':
+        """Filter the dataset given some selectors.
+
+        Examples:
+            To select subjects by their IDs:
+            ```python
+            dataset = dataset.select(subject_id=['001', '002'])
+            ```
+
+            To select subjects by a regex pattern:
+            ```python
+            dataset = dataset.select(regex=True, subject='^00[1-2]$')
+            ```
+
+            To select activities by their names:
+            ```python
+            dataset = dataset.select(activity=['NB', 'SOS'])
+            ```
+
+        Args:
+            selector_kwargs: list of study flow values to select, or a regex pattern.
+                             For example, `subject_id=['001', '002']` or `subject_id=r'00[1-2]'`.
+
+        """
+        if not hasattr(self, 'study_flow'):
+            raise AttributeError('Dataset is not initiated yet. Use `open()` method.')
+
+        for k, v in selector_kwargs.items():
+
+            # TODO automatically detect regex patterns
+            # try:
+            #     assert isinstance(v, str), 'Regex should be a string.'
+            #     re.compile(v)
+            #     is_regex = True
+            # except Exception:
+            #     is_regex = False
+
+            if k not in self.study_flow.columns:
+                raise ValueError(f'Invalid selector: {k}')
+
+            if isinstance(v, str):
+                # FIXME this also considers regex patterns
+                self.study_flow = self.study_flow[self.study_flow[k].str.contains(v)]
+                if k == 'subject_id':
+                    self.subjects = self.subjects[self.subjects[k].str.contains(v)]
+            elif isinstance(v, list):
+                self.study_flow = self.study_flow[self.study_flow[k].isin(v)]
+                if k == 'subject_id':
+                    self.subjects = self.subjects[self.subjects[k].isin(v)]
+            else:
+                raise ValueError(f'Invalid type for selector {k}: {type(v)}')
+
+        return self
+
+    def load(self) -> 'Dataset':
+        """Load the dataset with the given name.
+
+        Returns:
+            Dataset: The newly loaded dataset.
+
+        """
         # SECTION response table
         response_files = self.study_flow.apply(lambda s:
             (self.db_path /
@@ -78,45 +142,23 @@ class Dataset():
         self.response = pd.concat(response_dfs, axis=0, ignore_index=True)
         # !SECTION response table
 
-        # SECTION stimulus table
+        # TODO SECTION stimulus table
         self.stimulus = ...
         # !SECTION stimulus table
 
-        # SECTION option table
+        # TODO SECTION option table
         self.option = ...
         # !SECTION option table
 
-    def select(self) -> 'Dataset':
-        """Filter the dataset given some selectors."""
-        raise NotImplementedError('Not implemented yet.')
-
-    def load(self, name: str, download: bool = True) -> 'Dataset':
-        """Load the dataset with the given name.
-
-        Args:
-            name: Name of the dataset to load.
-            download: whether to download the dataset if it does not exist.
-
-        Raises:
-            NotImplementedError: if the method is not implemented yet.
-
-        """
-        raise NotImplementedError('Not implemented yet.')
+        return self
 
     @classmethod
-    def load_all(cls, name: str, download: bool = True) -> 'Dataset':
-        """Load the full dataset, given its name.
-
-        Notes:
-            This is a slow operation and should be used with caution.
+    def open(cls, name: str, download: bool = True) -> 'Dataset':
+        """Open the dataset with the given name, and optionally download it if it does not exist.
 
         Args:
-            name: the name to the dataset file. See `list_datasets()` for available
-                  datasets.
+            name: Name of the dataset to open.
             download: whether to download the dataset if it does not exist.
-
-        Raises:
-            FileNotFoundError: if the dataset does not exist and download is False.
 
         """
         path = Path.home() / '.behaverse' / 'datasets' / name

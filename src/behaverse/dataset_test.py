@@ -19,13 +19,29 @@ def test_download_dataset():
     assert output == Path.home() / '.behaverse' / 'datasets' / 'P500-L1m'
 
 
-def test_load_dataset():
+def test_load_all_dataset():
     """Load a behaverse dataset."""
     from .dataset import Dataset
 
-    dataset = Dataset.load_all('P500-L1m')
+    dataset = Dataset.open('P500-L1m').load()
 
     assert dataset.name == 'P500-L1m'
     assert len(dataset.subjects) > 0
     assert len(dataset.study_flow) > 0
     assert len(dataset.response) > 0
+
+
+def test_load_selected_dataset():
+    """Load a behaverse dataset partially."""
+    from .dataset import Dataset
+
+    subject_ids = ['001', '002']
+
+    dataset = Dataset.open('P500-L1m').select(subject_id=subject_ids).load()
+
+    assert dataset.name == 'P500-L1m'
+    assert len(dataset.subjects) == len(subject_ids)
+    assert len(dataset.study_flow.subject_id.unique()) == len(subject_ids)
+
+    # FIXME subject_index in response table must be renamed to subject_id
+    assert len(dataset.response.subject_index.unique()) == len(subject_ids)
