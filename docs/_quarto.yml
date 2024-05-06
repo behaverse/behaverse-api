@@ -12,6 +12,8 @@ website:
     left:
       - getting_started.qmd
       - api/index.qmd
+      - text: Data Model
+        href: https://behaverse.github.io/data-model/
     right:
       - icon: github
         href: https://github.com/behaverse/behaverse/
