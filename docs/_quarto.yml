@@ -8,8 +8,14 @@ execute:
 
 website:
   navbar:
+    title: Behaverse
     left:
+      - getting_started.qmd
       - api/index.qmd
+    right:
+      - icon: github
+        href: https://github.com/behaverse/behaverse/
+
 
 interlinks:
   fast: true
