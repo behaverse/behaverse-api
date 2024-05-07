@@ -32,16 +32,16 @@ jobs:
         uses: quarto-dev/quarto-actions/render@v2
         with:
           to: html
-          path: behaverse/docs
+          path: docs/
 
       - name: 📦 Compress
-        run: cd behaverse/docs/ && tar -cvf _site.tar.gz _site/
+        run: cd docs/ && tar -cvf _site.tar.gz _site/
 
       - name: ⬆️ Upload
         uses: actions/upload-artifact@v4
         with:
           name: _site.tar.gz
-          path: behaverse/docs/_site.tar.gz
+          path: docs/_site.tar.gz
           retention-days: 1
 
   deploy:
