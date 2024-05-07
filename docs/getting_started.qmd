@@ -1,5 +1,4 @@
 ---
-title: "Getting Started"
 execute:
   echo: true
 jupyter: python3
