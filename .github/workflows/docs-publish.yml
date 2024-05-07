@@ -1,4 +1,4 @@
-name: Publish API Website
+name: 📚 Publish API Website
 
 on:
   release:
