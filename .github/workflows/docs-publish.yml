@@ -59,18 +59,10 @@ jobs:
         run: tar -xvf _site.tar.gz
       - name: 🛠️ Setup Pages
         uses: actions/configure-pages@v5
-        with:
-            repository: behaverse/behaverse.github.io
-            token: ${{ secrets.GITHUB_TOKEN }}
       - name: ⬆️ Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site/
-          repository: behaverse/behaverse.github.io
-          token: ${{ secrets.GITHUB_TOKEN }}
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-            repository: behaverse/behaverse.github.io
-            token: ${{ secrets.GITHUB_TOKEN }}
