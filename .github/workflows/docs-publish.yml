@@ -1,8 +1,9 @@
 name: Publish API Website
 
 on:
-    release:
+  release:
       types: [published]
+  workflow_dispatch: {}
 
 permissions:
   id-token: write
