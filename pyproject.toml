@@ -35,7 +35,7 @@ dynamic = ["version", "description"]
 
 [project.urls]
 Homepage = "https://behaverse.org"
-Documentation = "https://github.com/behaverse/data-model"
+Documentation = "https://behaverse.github.io"
 Repository = "https://github.com/behaverse/behaverse"
 
 [tools.flit.module]

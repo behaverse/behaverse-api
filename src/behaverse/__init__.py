@@ -1,6 +1,6 @@
 """Behaverse Python Package."""
 
-__version__ = '0.0.3-dev5'
+__version__ = '0.0.3-dev6'
 
 from .dataset import Dataset
 from .dataset_description import DatasetDescription
