@@ -1,23 +1,13 @@
-name: behaverse
+name: behaverse-registry
 
 channels:
   - conda-forge
   - defaults
 
 dependencies:
-  - python
+  - python>3.10
   - pip
-  - ruff
-  - pytest
-
-  - tqdm
-
-  # packaging
-  - flit
-
-  # data
-  - pandas
-
-  # documentation
-  - quarto
-  - quartodoc
+  - git
+  - dvc
+  - dvc-ssh
+  - dvc-gdrive
