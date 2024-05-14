@@ -32,6 +32,9 @@ def download_dvc_dataset(name: str, **kwargs) -> Path:
     assert name is not None, 'Dataset name is required.'
 
     # TODO: query DVC registry for the url of the dataset
+    # NOTE: git repo: https://github.com/behaverse/behaverse.git
+    # NOTE: git ssh: git@github.com:behaverse/behaverse.git
+    # NOTE: rev: registry
     url = ...
 
     dest = Path(kwargs.get('dest',
