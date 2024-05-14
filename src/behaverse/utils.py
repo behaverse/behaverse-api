@@ -76,6 +76,9 @@ def download_dataset(name: str, **kwargs) -> Path:
         kwargs (dict): additional arguments. For example you can specify the destination
                         path (`dest`) to save the dataset file. Defaults to
                         `~/.behaverse/datasets/{name}/`. Or `chunk_size` to specify the chunk size for downloading.
+
+    Returns:
+        Path: Path to the downloaded dataset file.
     """
     assert name is not None, 'Dataset name is required.'
 
