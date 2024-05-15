@@ -1,11 +1,15 @@
-"""Utility functions for DVC datasets."""
+"""Utilities for accessing datasets from the Behaverse DVC registry.
+
+
+
+"""
 
 import logging
 from pathlib import Path
 logger = logging.getLogger(__name__)
 
 
-def download_dvc_dataset(name: str, **kwargs) -> Path:
+def download_dataset(name: str, **kwargs) -> Path:
     """Download a dataset from the dvc-managed Behaverse registry.
 
     Args:
