@@ -1,4 +1,4 @@
-# Behaverse Data/Model Registry
+# Behaverse Registry
 
 This repository contains a collection of datasets that can be accessed using the [`behaverse`](https://behaverse.github.io) package. The datasets are stored in the `datasets` folder and are organized by the name of the dataset. Each dataset is stored in a separate folder and contains the following files:
 
@@ -12,3 +12,10 @@ This repository contains a collection of datasets that can be accessed using the
 
 All the large files are managed using [DVC](https://dvc.org/). You just need to [install `dvc`](https://dvc.org/doc/install) and run corresponding commands to upload or download the data.
 
+
+## Conventions
+
+- The dataset name should be in lowercase and separated by underscores.
+- The dataset folder name should be the same as the dataset name.
+- The dataset folder should contain a `README.md` file with a description of the dataset.
+- The dataset folder should contain a `LICENSE` file with the license of the dataset.
