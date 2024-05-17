@@ -1,8 +1,5 @@
-"""Utilities for accessing datasets from the Behaverse DVC registry.
+"""TODO: Access Behaverse datasets via Behaverse Registry."""
 
-
-
-"""
 
 import logging
 from pathlib import Path
