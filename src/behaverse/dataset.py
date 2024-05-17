@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 from tqdm.auto import tqdm
 from typing import Any
-from .utils import download_dataset
+from .storage.http import download_dataset
 from .dataset_description import DatasetDescription
 import logging
 logger = logging.getLogger(__name__)
@@ -38,7 +38,11 @@ class Dataset():
 
         self.name = name
 
-        self.db_path = Path.home() / '.behaverse' / 'datasets' / name
+        self.db_path = (
+            Path.home() /
+            '.behaverse' /
+            'datasets' /
+            self.name.replace('/', '-'))
 
         if not self.db_path.exists():
             raise FileNotFoundError(f'Dataset not found: {self.db_path}')
@@ -161,7 +165,11 @@ class Dataset():
             download: whether to download the dataset if it does not exist.
 
         """
-        path = Path.home() / '.behaverse' / 'datasets' / name
+        path = (
+            Path.home() /
+            '.behaverse' /
+            'datasets' /
+            name.replace('/', '-'))
 
         if not path.exists():
             if not download:

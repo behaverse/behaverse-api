@@ -9,7 +9,7 @@ from .functional import (
     load_dataset,
     describe_dataset,
     validate_dataset)
-from .utils import list_datasets, download_dataset
+from .storage.http import list_datasets, download_dataset
 
 
 __all__ = [

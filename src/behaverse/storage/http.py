@@ -24,7 +24,7 @@ def list_datasets() -> pd.DataFrame:
     # use requests to get the list of datasets and parse it using yaml
     import requests
     import yaml
-    url = 'https://edu.lu/g3988'  # short url for the list of datasets
+    url = 'https://edu.lu/g3988'  # default url for the list of datasets
     response = requests.get(url)
     if response.status_code == 200:
         datasets = pd.DataFrame(yaml.safe_load(response.text))
@@ -48,7 +48,11 @@ def extract_dataset(name: str, **kwargs) -> Path:
         Path: Path to the extracted directory.
 
     """
-    src = Path.home() / '.behaverse' / 'datasets' / f'{name}.tar.gz'
+    src = (Path.home() /
+           '.behaverse' /
+           'datasets' /
+           f'{name.replace('/', '-')}.tar.gz')
+
     if not src.exists():
         raise FileNotFoundError(f'{src} not found.')
 
@@ -66,7 +70,7 @@ def extract_dataset(name: str, **kwargs) -> Path:
         tar.extraction_filter = staticmethod(tarfile.fully_trusted_filter)  # type: ignore
 
     tar.extractall(dest)
-    output_folder = dest / tar.getnames()[0]
+    output_folder = dest / tar.getnames()[1]
     tar.close()
     logger.info(f'Extracted to {output_folder}')
 
@@ -92,7 +96,10 @@ def download_dataset(name: str, **kwargs) -> Path:
     url = datasets[datasets['name'] == name]['url'].values[0]
 
     dest = Path(kwargs.get('dest',
-                           Path.home() / '.behaverse' / 'datasets' / f'{name}.tar.gz'))
+                           Path.home() /
+                           '.behaverse' /
+                           'datasets' /
+                           f'{name.replace('/', '-')}.tar.gz'))
     chunk_size = kwargs.get('chunk_size', 8096)
 
     if dest.exists():
