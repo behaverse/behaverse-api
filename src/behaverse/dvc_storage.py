@@ -2,6 +2,7 @@
 
 
 import logging
+from .utils import extract_dataset
 from pathlib import Path
 logger = logging.getLogger(__name__)
 
@@ -30,22 +31,19 @@ def download_dataset(name: str, **kwargs) -> Path:
     # FIXME: query DVC registry for the url of the dataset
 
     repo = 'git@github.com:behaverse/behaverse.git'
-    fs = DVCFileSystem(repo, rev='Registry', remote='origin')
+    fs = DVCFileSystem(repo, rev='Registry', remote='ulhpc')
 
     dest = Path(kwargs.get('dest',
-                           Path.home() / '.behaverse' / 'datasets' / f'{name}.tar.gz'))
-
-    fs.get(f'datasets/{name}.tar.gz.dvc', f'tmp/{name.replace("/", "-")}')
+                           Path.home() / '.behaverse' / 'datasets' / f'{name.replace("/", "-")}.tar.gz'))
 
     if dest.exists():
-        return ...  # TODO path to the extract_dataset() call
+        return extract_dataset(name)
 
     dest.parent.mkdir(parents=True, exist_ok=True)
 
-    # TODO save to 'dest'
+    # download the dataset using DVC
+    fs.get(f'datasets/{name}.tar.gz', dest.as_posix())
 
     logger.info(f'Downloaded DVC dataset to {dest}, now extracting...')
 
-    output_path: Path = ...  # TODO extract_dataset(name)
-    logger.info(f'Extracted DVC dataset to {output_path}')
-    return output_path
+    return extract_dataset(name)

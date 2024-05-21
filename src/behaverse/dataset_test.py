@@ -5,7 +5,7 @@ from pathlib import Path
 
 def test_list_datasets():
     """List available datasets."""
-    from .storage.http import list_datasets
+    from .http_storage import list_datasets
     datasets = list_datasets()
     print(datasets)
 
@@ -16,7 +16,7 @@ def test_download_dataset():
     # url = datasets.query('name == "P500-L1m"')['url'].item()
     # print(url)
 
-    from .storage.http import download_dataset
+    from .storage.http_storage import download_dataset
 
     output = download_dataset('P500_9subjects/L1m')
 

@@ -1,6 +1,6 @@
 """Test for dvc.py."""
 
-from behaverse.storage.dvc_storage import download_dataset
+from behaverse.dvc_storage import download_dataset
 
 
 def test_download_dataset():

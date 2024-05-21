@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 from tqdm.auto import tqdm
 from typing import Any
-from .storage.http import download_dataset
+from .http_storage import download_dataset
 from .dataset_description import DatasetDescription
 import logging
 logger = logging.getLogger(__name__)

@@ -41,7 +41,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dvc = ["dvc>3"]
+dvc = ["dvc>3","dvc-ssh"]
 test = [
     "pytest"
 ]
