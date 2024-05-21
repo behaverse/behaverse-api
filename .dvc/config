@@ -1,0 +1,7 @@
+[core]
+    autostage = true
+    analytics = false
+    remote = ulhpc
+
+['remote "ulhpc"']
+    url = ssh://aion-cluster/work/projects/behaverse/datasets/DVCStore
