@@ -23,24 +23,19 @@ def download_dataset(name: str, **kwargs) -> Path:
         FileNotFoundError: if the dataset is not found.
         AssertionError: if the dataset name is not provided.
     """
-    try:
-        import dvc.api
-    except ImportError as e:
-        raise ImportError(
-            'DVC is required to download the dataset.'
-             'Please follow https://dvc.org/doc/install to install DVC.') from e
+    from dvc.api import DVCFileSystem
 
     assert name is not None, 'Dataset name is required.'
 
-    # TODO: query DVC registry for the url of the dataset
-    # NOTE: git repo: https://github.com/behaverse/behaverse.git
-    # NOTE: git ssh: git@github.com:behaverse/behaverse.git
-    # NOTE: rev: registry
-    url = ...
+    # FIXME: query DVC registry for the url of the dataset
+
+    repo = 'git@github.com:behaverse/behaverse.git'
+    fs = DVCFileSystem(repo, rev='Registry', remote='origin')
 
     dest = Path(kwargs.get('dest',
                            Path.home() / '.behaverse' / 'datasets' / f'{name}.tar.gz'))
-    chunk_size = kwargs.get('chunk_size', 8096)
+
+    fs.get(f'datasets/{name}.tar.gz.dvc', f'tmp/{name.replace("/", "-")}')
 
     if dest.exists():
         return ...  # TODO path to the extract_dataset() call
