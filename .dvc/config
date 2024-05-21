@@ -1,5 +1,5 @@
 [core]
     autostage = true
-#     remote = onedrive
-# ['remote "onedrive"']
-#     url = https://uniluxembourg-my.sharepoint.com/:f:/g/personal/morteza_ansarinia_uni_lu/Eos-gaukHBdEp0QC6dX0sjoBctyGENB5SDDKg8TC5ENL6g
+    remote = onedrive
+['remote "onedrive"']
+    url = https://uniluxembourg-my.sharepoint.com/:f:/g/personal/morteza_ansarinia_uni_lu/Eos-gaukHBdEp0QC6dX0sjoBctyGENB5SDDKg8TC5ENL6g
