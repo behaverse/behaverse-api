@@ -9,3 +9,5 @@ CRAN_SUBMITION
 
 .ruff_cache/
 .pytest_cache/
+
+/docs
