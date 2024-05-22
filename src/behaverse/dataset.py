@@ -5,7 +5,6 @@ from pathlib import Path
 import pandas as pd
 from tqdm.auto import tqdm
 from typing import Any
-from .http_storage import download_dataset
 from .dataset_description import DatasetDescription
 import logging
 logger = logging.getLogger(__name__)
@@ -38,11 +37,7 @@ class Dataset():
 
         self.name = name
 
-        self.db_path = (
-            Path.home() /
-            '.behaverse' /
-            'datasets' /
-            self.name.replace('/', '-'))
+        self.db_path = Path.home() / '.behaverse' / 'datasets' / self.name
 
         if not self.db_path.exists():
             raise FileNotFoundError(f'Dataset not found: {self.db_path}')
@@ -157,23 +152,27 @@ class Dataset():
         return self
 
     @classmethod
-    def open(cls, name: str, download: bool = True) -> 'Dataset':
+    def open(cls, name: str, download: bool = True, storage='http') -> 'Dataset':
         """Open the dataset with the given name, and optionally download it if it does not exist.
 
         Args:
             name: Name of the dataset to open.
             download: whether to download the dataset if it does not exist.
+            storage: storage backend to use (`http` or `dvc`). Defaults to 'http'.
 
         """
-        path = (
-            Path.home() /
-            '.behaverse' /
-            'datasets' /
-            name.replace('/', '-'))
+        path = Path.home() / '.behaverse' / 'datasets' / name
+
+        match storage:
+            case 'dvc':
+                from .dvc_storage import download_dataset
+            case _:
+                from .http_storage import download_dataset
 
         if not path.exists():
             if not download:
-                raise FileNotFoundError(f'Dataset not found: {path}')
+                raise FileNotFoundError(f'Dataset not found: {path}. '
+                                        'Use `download=True` to download it.')
             download_dataset(name)
 
         return cls(name, allow_instantiation=True)
@@ -200,7 +199,8 @@ class Dataset():
         """
         try:
             path = Path.home() / '.behaverse' / 'datasets' / self.name
-            assert path.exists, f'Path not found: {path.as_posix()}'
+            assert path.exists(), f'Path not found: {path.as_posix()}'
+            assert path.is_dir(), f'Path is not a directory: {path.as_posix()}'
             # TODO add more rules here
             return True
         except AssertionError as e:

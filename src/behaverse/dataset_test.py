@@ -12,22 +12,23 @@ def test_list_datasets():
 
 def test_download_dataset():
     """Download a behaverse dataset from a public OneDrive link."""
+    # NOTE this commented section is ALT to get one of the available datasets
     # datasets = list_datasets()
-    # url = datasets.query('name == "P500-L1m"')['url'].item()
+    # url = datasets.query('name == "P500_9subjects/L1m"')['url'].item()
     # print(url)
 
-    from .storage.http_storage import download_dataset
+    from .http_storage import download_dataset
 
     output = download_dataset('P500_9subjects/L1m')
 
     assert output.exists()
     assert output.is_dir()
     assert len(list(output.iterdir())) > 0
-    assert output == Path.home() / '.behaverse' / 'datasets' / 'P500_9subjects-L1m'
+    assert output == (Path.home() / '.behaverse' / 'datasets' / 'P500_9subjects' / 'L1m')
 
 
-def test_load_all_dataset():
-    """Load a behaverse dataset."""
+def test_load_full_dataset():
+    """Load all records of a dataset."""
     from .dataset import Dataset
 
     dataset = Dataset.open('P500_9subjects/L1m').load()
@@ -39,7 +40,7 @@ def test_load_all_dataset():
 
 
 def test_load_selected_dataset():
-    """Load a behaverse dataset partially."""
+    """Partially load a behaverse dataset."""
     from .dataset import Dataset
 
     subject_ids = ['001', '002']

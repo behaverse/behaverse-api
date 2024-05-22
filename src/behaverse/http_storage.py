@@ -53,10 +53,7 @@ def download_dataset(name: str, **kwargs) -> Path:
     url = datasets[datasets['name'] == name]['url'].values[0]
 
     dest = Path(kwargs.get('dest',
-                           Path.home() /
-                           '.behaverse' /
-                           'datasets' /
-                           f'{name.replace('/', '-')}.tar.gz'))
+                           Path.home() / '.behaverse' / 'datasets' / f'{name}.tar.gz'))
     chunk_size = kwargs.get('chunk_size', 8096)
 
     if dest.exists():
