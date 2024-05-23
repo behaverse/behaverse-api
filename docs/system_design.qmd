@@ -27,3 +27,4 @@ The package should provide access to a collection of datasets for cognitive rese
 - Deployment
   - on PyPI
   - DevOps (e.g., automatic release to PyPI and GitHub Pages)
+- The main audience is not our team, but other researchers in psychology, neuroscience, and related fields.
