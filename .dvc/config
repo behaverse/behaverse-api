@@ -3,5 +3,5 @@
     analytics = false
     remote = ulhpc
 
-['remote "ulhpc"']
+['remote "aion-cluster"']
     url = ssh://aion-cluster/work/projects/behaverse/datasets/DVCStore
