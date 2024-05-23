@@ -15,7 +15,7 @@ All the large files are managed using [DVC](https://dvc.org/). You just need to 
 
 ## Conventions
 
-- The dataset name should be in lowercase and separated by underscores.
+- The dataset name should be in lowercase and separated by underscores. Abbreviated names can be uppercase though (e.g., `P500`).
 - The dataset folder name should be the same as the dataset name.
 - The dataset folder should contain a `README.md` file with a description of the dataset.
 - The dataset folder should contain a `LICENSE` file with the license of the dataset.
