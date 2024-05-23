@@ -5,7 +5,7 @@ on:
     types: [published]
   # push:
   #   branches:
-  #     - python
+  #     - Python
 
 permissions:
   contents: read
