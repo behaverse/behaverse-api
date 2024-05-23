@@ -45,6 +45,7 @@ jobs:
           retention-days: 1
 
   deploy:
+    name: 🚀 Deploy
     needs: build
     environment:
       name: github-pages
