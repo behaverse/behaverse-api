@@ -31,7 +31,7 @@ def download_dataset(name: str, **kwargs) -> Path:
     # FIXME: query DVC registry for the url of the dataset
 
     repo = 'git@github.com:behaverse/behaverse.git'
-    fs = DVCFileSystem(repo, rev='Registry', remote='ulhpc')
+    fs = DVCFileSystem(repo, rev='Registry', remote='aion-cluster')
 
     dest = Path(kwargs.get('dest',
                            Path.home() / '.behaverse' / 'datasets' / f'{name.replace("/", "-")}.tar.gz'))
