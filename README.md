@@ -12,13 +12,18 @@ pip install behaverse
 
 ## Usage
 
-See the [documentation](https://behaverse.github.io/) for more information on how to use the package.
+See the [Behaverse website](https://behaverse.github.io/) for more information on how to use the package.
+
+## License
+
+TODO
+
+## Contributing
 
 
+### Development
 
-## Development
-
-Before starting development, you need to install the dependencies:
+Before starting development, you need to install the dependencies. You can do this by creating a new conda environment as defined in the `environment.yml` file:
 
 ```bash
 mamba env create -f environment.yml
@@ -36,13 +41,7 @@ quartodoc build && quartodoc interlinks && quarto preview
 
 The documentation will be available in the `docs/_site/` directory.
 
-## License
 
-TODO
-
-## Contributing
-
-TODO
 
 ## Acknowledgements
 
