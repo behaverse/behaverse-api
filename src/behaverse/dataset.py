@@ -42,10 +42,6 @@ class Dataset():
         if not self.db_path.exists():
             raise FileNotFoundError(f'Dataset not found: {self.db_path}')
 
-        # TODO add dataset-level attributes
-        # TODO move time-consuming operations to methods and/or lazy load
-        self.description = DatasetDescription()
-
         # SECTION subjects table
         self.subjects = pd.read_csv(self.db_path / 'subjects.csv',
                                     dtype={'subject_id': str})
@@ -59,34 +55,34 @@ class Dataset():
              for f in study_flow_files], axis=0, ignore_index=True)
         # !SECTION study flow table
 
-    def select(self, **selector_kwargs: Any) -> 'Dataset':
+    def where(self, **conditions: Any) -> 'Dataset':
         """Filter the dataset given some selectors.
 
         Examples:
             To select subjects by their IDs:
             ```python
-            dataset = dataset.select(subject_id=['001', '002'])
+            dataset = dataset.where(subject_id=['001', '002'])
             ```
 
             To select subjects by a regex pattern:
             ```python
-            dataset = dataset.select(regex=True, subject='^00[1-2]$')
+            dataset = dataset.where(regex=True, subject='^00[1-2]$')
             ```
 
             To select activities by their names:
             ```python
-            dataset = dataset.select(activity=['NB', 'SOS'])
+            dataset = dataset.where(activity=['NB', 'SOS'])
             ```
 
         Args:
-            selector_kwargs: list of study flow values to select, or a regex pattern.
+            conditions: list of study flow condition to select, or a regex pattern.
                              For example, `subject_id=['001', '002']` or `subject_id=r'00[1-2]'`.
 
         """
         if not hasattr(self, 'study_flow'):
             raise AttributeError('Dataset is not initiated yet. Use `open()` method.')
 
-        for k, v in selector_kwargs.items():
+        for k, v in conditions.items():
 
             # TODO automatically detect regex patterns
             # try:
@@ -97,7 +93,7 @@ class Dataset():
             #     is_regex = False
 
             if k not in self.study_flow.columns:
-                raise ValueError(f'Invalid selector: {k}')
+                raise ValueError(f'Invalid condition: {k}')
 
             if isinstance(v, str):
                 # FIXME this also considers regex patterns
@@ -152,7 +148,7 @@ class Dataset():
         return self
 
     @classmethod
-    def open(cls, name: str, download: bool = True, storage='http') -> 'Dataset':
+    def open(cls, name: str, download: bool = True, storage: str='http') -> 'Dataset':
         """Open the dataset with the given name, and optionally download it if it does not exist.
 
         Args:
@@ -179,7 +175,9 @@ class Dataset():
 
     def describe(self) -> DatasetDescription:
         """Provides metadata and information card for the dataset."""
-        return self.description
+        # TODO add dataset-level attributes
+        description = DatasetDescription()
+        return description
 
     def validate(self) -> bool:
         """Simple validations to check if the dataset is valid and consistent.

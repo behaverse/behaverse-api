@@ -30,7 +30,7 @@ def open_dataset(name: str, download: bool = True) -> Dataset:
     return Dataset.open(name, download)
 
 
-def load_dataset(name: str, **selector_kwargs: Any) -> Dataset:
+def load_dataset(name: str, **conditions: Any) -> Dataset:
     """Open the dataset, load content into memory, and close its file handles.
 
     Notes:
@@ -40,24 +40,25 @@ def load_dataset(name: str, **selector_kwargs: Any) -> Dataset:
 
     Args:
         name: Name of the dataset to load.
-        selector_kwargs (dict): Additional selection arguments, e.g., `subject_id=['001', '002']`.
+        conditions (dict): Additional conditions passed to `where()`, e.g., `subject_id=['001', '002']`.
 
     Returns:
         Dataset: The newly loaded dataset.
 
     Examples:
-        To fully load the dataset with the name `P500-L1m` (time-consuming):
+        To fully load the dataset with the name `P500_9subjects/L1m`:
         ```python
-        dataset = load_dataset('P500-L1m')
+        dataset = load_dataset('P500_9subjects/L1m')  #FIXME
         ```
 
-        To load a dataset with the name `P500-L1m` and select subjects by their IDs:
+        To load a dataset with the name `P500_9subjects/L1m` and select
+        a subset of subjects by their IDs:
         ```python
-        dataset = load_dataset('P500-L1m', subject_id=['001', '002'])
+        dataset = load_dataset('P500_9subjects/L1m', subject_id=['001', '002'])
         ```
 
     """
-    return Dataset.open(name).select(**selector_kwargs).load()
+    return Dataset.open(name).where(**conditions).load()
 
 
 def describe_dataset(name: str) -> DatasetDescription:

@@ -39,13 +39,13 @@ def test_load_full_dataset():
     assert len(dataset.response) > 0
 
 
-def test_load_selected_dataset():
+def test_load_dataset_with_condition():
     """Partially load a behaverse dataset."""
     from .dataset import Dataset
 
     subject_ids = ['001', '002']
 
-    dataset = Dataset.open('P500_9subjects/L1m').select(subject_id=subject_ids).load()
+    dataset = Dataset.open('P500_9subjects/L1m').where(subject_id=subject_ids).load()
 
     assert dataset.name == 'P500_9subjects/L1m'
     assert len(dataset.subjects) == len(subject_ids)

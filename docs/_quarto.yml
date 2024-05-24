@@ -56,7 +56,7 @@ quartodoc:
         children: separate
         members:
           - open
-          - select
+          - where
           - describe
           - load
           - validate

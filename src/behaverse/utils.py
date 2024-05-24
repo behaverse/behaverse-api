@@ -10,8 +10,8 @@ def extract_dataset(name: str, **kwargs) -> Path:
     """Extract a dataset and return the path to the extracted directory.
 
     Args:
-        name: Name of the datasets, e.g., `P500/L1m` for a compressed file of the name
-              `P500/L1m.tar.gz`.
+        name: Name of the datasets, e.g., `P500_9subjects/L1m` for a
+              compressed file of the name `P500_9subjects/L1m.tar.gz`.
         kwargs (dict): Additional arguments, including `dest` which is the
                        destination directory to extract the file. Defaults to (i.e.,
                        `~/.behaverse/datasets/{name}`).

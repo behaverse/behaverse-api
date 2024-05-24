@@ -18,7 +18,7 @@ def list_datasets() -> pd.DataFrame:
     """List available datasets.
 
     Returns:
-        DataFrame: List of available datasets including name, description, and url.
+        DataFrame: List of available datasets including name, short description, and url.
 
     """
     # use requests to get the list of datasets and parse it using yaml
