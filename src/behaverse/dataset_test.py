@@ -36,7 +36,7 @@ def test_load_full_dataset():
     assert dataset.name == 'P500_9subjects/L1m'
     assert len(dataset.subjects) > 0
     assert len(dataset.study_flow) > 0
-    assert len(dataset.response) > 0
+    assert len(dataset.response_table) > 0
 
 
 def test_load_dataset_with_condition():
@@ -52,4 +52,4 @@ def test_load_dataset_with_condition():
     assert len(dataset.study_flow.subject_id.unique()) == len(subject_ids)
 
     # FIXME subject_index in response table must be renamed to subject_id
-    assert len(dataset.response.subject_index.unique()) == len(subject_ids)
+    assert len(dataset.response_table['subject_index'].unique()) == len(subject_ids)

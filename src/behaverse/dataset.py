@@ -37,18 +37,18 @@ class Dataset():
 
         self.name = name
 
-        self.db_path = Path.home() / '.behaverse' / 'datasets' / self.name
+        self.path = Path.home() / '.behaverse' / 'datasets' / self.name
 
-        if not self.db_path.exists():
-            raise FileNotFoundError(f'Dataset not found: {self.db_path}')
+        if not self.path.exists():
+            raise FileNotFoundError(f'Dataset not found: {self.path}')
 
         # SECTION subjects table
-        self.subjects = pd.read_csv(self.db_path / 'subjects.csv',
+        self.subjects = pd.read_csv(self.path / 'subjects.csv',
                                     dtype={'subject_id': str})
         # !SECTION subjects table
 
         # SECTION study flow table
-        study_flow_files = list(self.db_path.glob('**/study_flow.csv'))
+        study_flow_files = list(self.path.glob('**/study_flow.csv'))
 
         self.study_flow = pd.concat(
             [pd.read_csv(f, dtype={'subject_id': str, 'session_id': str})
@@ -116,33 +116,70 @@ class Dataset():
             Dataset: The newly loaded dataset.
 
         """
+        # TODO single progress bar for all the tables
+        # TODO refactor as load_table method
+
         # SECTION response table
         response_files = self.study_flow.apply(lambda s:
-            (self.db_path /
+            (self.path /
             f'subject_{s["subject_id"]}' /
             f'session_{s["session_id"]}' /
             f'{s["activity"]}' /
             f'response_{s["attempt"]}.csv').absolute().as_posix(), axis=1).to_list()
 
         response_dfs = []
-        for f in tqdm(response_files):
+        for f in tqdm(response_files, desc='Loading responses'):
             if Path(f).exists():
                 try:
-                    df = pd.read_csv(f)
+                    df = pd.read_csv(f, dtype={'subject_id': str})
                     if not df.empty and len(df.columns) > 1:
                         response_dfs.append(df)
                 except pd.errors.EmptyDataError:
                     logger.warning(f'Empty response file: {f}')
 
-        self.response = pd.concat(response_dfs, axis=0, ignore_index=True)
+        self.response_table = pd.concat(response_dfs, axis=0, ignore_index=True)
         # !SECTION response table
 
-        # TODO SECTION stimulus table
-        self.stimulus = ...
+        # SECTION stimulus table
+        stimulus_files = self.study_flow.apply(lambda s:
+            (self.path /
+            f'subject_{s["subject_id"]}' /
+            f'session_{s["session_id"]}' /
+            f'{s["activity"]}' /
+            f'stimulus_{s["attempt"]}.csv').absolute().as_posix(), axis=1).to_list()
+
+        stimulus_dfs = []
+        for f in tqdm(stimulus_files, desc='Loading stimuli'):
+            if Path(f).exists():
+                try:
+                    df = pd.read_csv(f)
+                    if not df.empty and len(df.columns) > 1:
+                        stimulus_dfs.append(df)
+                except pd.errors.EmptyDataError:
+                    logger.warning(f'Empty stimulus file: {f}')
+
+        self.stimulus_table = pd.concat(stimulus_dfs, axis=0, ignore_index=True)
         # !SECTION stimulus table
 
-        # TODO SECTION option table
-        self.option = ...
+        # SECTION option table
+        option_files = self.study_flow.apply(lambda s:
+            (self.path /
+            f'subject_{s["subject_id"]}' /
+            f'session_{s["session_id"]}' /
+            f'{s["activity"]}' /
+            f'option_{s["attempt"]}.csv').absolute().as_posix(), axis=1).to_list()
+
+        option_dfs = []
+        for f in tqdm(option_files, desc='Loading options'):
+            if Path(f).exists():
+                try:
+                    df = pd.read_csv(f)
+                    if not df.empty and len(df.columns) > 1:
+                        option_dfs.append(df)
+                except pd.errors.EmptyDataError:
+                    logger.warning(f'Empty option file: {f}')
+
+        self.option_table = pd.concat(option_dfs, axis=0, ignore_index=True)
         # !SECTION option table
 
         return self
