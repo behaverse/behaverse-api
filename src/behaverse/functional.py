@@ -61,17 +61,17 @@ def load_dataset(name: str, **conditions: Any) -> Dataset:
     return Dataset.open(name).where(**conditions).load()
 
 
-def describe_dataset(name: str) -> DatasetDescription:
+def describe_dataset(dataset: Dataset) -> DatasetDescription:
     """Describe the dataset with the given name.
 
     Args:
-        name: Name of the dataset to describe.
+        dataset: Dataset to describe.
 
     Returns:
         DatasetDescription: Metadata and description of the dataset.
 
     """
-    return Dataset.open(name).describe()
+    return dataset.describe()
 
 
 def validate_dataset(name: str) -> bool:
