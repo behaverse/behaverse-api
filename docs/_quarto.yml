@@ -38,7 +38,7 @@ metadata-files:
   - api/_sidebar.yml
 
 quartodoc:
-  package: behaverse
+  package: behaverse.data
   dir: api
   source_dir: ../src
   parser: 'google'
@@ -49,8 +49,8 @@ quartodoc:
   sidebar: api/_sidebar.yml
 
   sections:
-  - title: Object-Oriented API
-    package: behaverse
+  - title: Behaverse Data (Object-Oriented API)
+    package: behaverse.data
     contents:
       - name: Dataset
         children: separate
@@ -62,15 +62,15 @@ quartodoc:
           - validate
       - name: DatasetDescription
         children: separate
-  - title: Functional API
-    package: behaverse
+  - title: Behaverse Data (Functional API)
+    package: behaverse.data
     contents:
       - list_datasets
       - open_dataset
       - load_dataset
       - describe_dataset
       - validate_dataset
-  - title: Utilities
-    package: behaverse.utils
+  - title: Data Utilities
+    package: behaverse.data.utils
     contents:
       - extract_dataset
