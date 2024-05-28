@@ -26,7 +26,7 @@ dependencies:
 
 # Usage
 
-The `behaverse` package provides a simple API to access datasets. You can use the `behaverse` package to download datasets, load them into memory, and access the data. Here is an example of how to use the package to list available datasets, download a dataset, select a subset of the dataset, and load it into memory:
+The `behaverse` package provides a simple API to access Behaverse services. You can use the `behaverse.data` module to download datasets, load them into memory, and access the data. Here is an example of how to use the package to list available datasets, download a dataset, select a subset of the dataset, and load it into memory:
 
 ```{python}
 from behaverse.data import list_datasets, download_dataset, load_dataset, open_dataset, describe_dataset
