@@ -14,8 +14,8 @@ def test_download_dataset():
     """Download a behaverse dataset from a public OneDrive link."""
     # NOTE this commented section is ALT to get one of the available datasets
     # datasets = list_datasets()
-    # url = datasets.query('name == "P500_9subjects/L1m"')['url'].item()
-    # print(url)
+    # download_url = datasets.query('name == "P500_9subjects/L1m"')['download_url'].item()
+    # print(download_url)
 
     from .http_storage import download_dataset
 

@@ -28,7 +28,7 @@ def download_dataset(name: str, **kwargs) -> Path:
 
     assert name is not None, 'Dataset name is required.'
 
-    # FIXME: query DVC registry for the url of the dataset
+    # FIXME: query DVC registry for the download_url of the dataset
 
     repo = 'git@github.com:behaverse/behaverse.git'
     fs = DVCFileSystem(repo, rev='Registry', remote='aion-cluster')
