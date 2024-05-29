@@ -17,7 +17,7 @@ def open_dataset(name: str, download: bool = True) -> Dataset:
     Notes:
     This function opens the dataset and returns a Dataset object. The dataset
     is not loaded into memory, and its contents are lazy-loaded. Use
-    [](`~behaverse.load_dataset`) to load the dataset into memory.
+    [](`~behaverse.data.load_dataset`) to load the dataset into memory.
 
     Args:
         name: Name of the dataset to open.
@@ -34,9 +34,9 @@ def load_dataset(name: str, **conditions: Any) -> Dataset:
     """Open the dataset, load content into memory, and close its file handles.
 
     Notes:
-    This is a wrapper around [](`~behaverse.open_dataset`). The difference is
+    This is a wrapper around [](`~behaverse.data.open_dataset`). The difference is
     that it loads the Dataset into memory, closes the file, and returns the Dataset.
-    In contrast, [](`~behaverse.open_dataset`) keeps the file handle open and lazy loads its contents.
+    In contrast, [](`~behaverse.data.open_dataset`) keeps the file handle open and lazy loads its contents.
 
     Args:
         name: Name of the dataset to load.
@@ -48,7 +48,7 @@ def load_dataset(name: str, **conditions: Any) -> Dataset:
     Examples:
         To fully load the dataset with the name `P500_9subjects/L1m`:
         ```python
-        dataset = load_dataset('P500_9subjects/L1m')  #FIXME
+        dataset = load_dataset('P500_9subjects/L1m')
         ```
 
         To load a dataset with the name `P500_9subjects/L1m` and select

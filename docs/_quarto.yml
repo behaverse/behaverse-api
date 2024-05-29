@@ -24,6 +24,8 @@ interlinks:
   sources:
     pandas:
       url: https://pandas.pydata.org/docs/
+    python:
+      url: https://docs.python.org/3/
 
 format:
   html:

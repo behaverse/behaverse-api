@@ -23,7 +23,7 @@ class Dataset():
 
     Args:
         name (str): the name to the dataset file. Use
-                    [](`~behaverse.list_datasets`) to see available datasets.
+                    [](`~behaverse.data.list_datasets`) to see available datasets.
         kwargs (dict): additional arguments.
 
     Raises:
