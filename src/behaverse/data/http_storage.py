@@ -18,7 +18,8 @@ def list_datasets() -> pd.DataFrame:
 
     Notes:
         The list of datasets is stored in a YAML file hosted on GitHub.
-        Default URL: https://raw.githubusercontent.com/behaverse/behaverse/Registry/datasets/datasets.yml
+        See [the datasets registry](https://github.com/behaverse/behaverse/tree/Registry/datasets)
+        for more information.
 
     """
     # default url for the list of datasets
