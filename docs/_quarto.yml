@@ -72,7 +72,7 @@ quartodoc:
       - load_dataset
       - describe_dataset
       - validate_dataset
-  - title: Data Utilities
+  - title: Utilities
     package: behaverse.data.utils
     contents:
       - extract_dataset
