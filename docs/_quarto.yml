@@ -44,14 +44,14 @@ quartodoc:
   dir: api
   source_dir: ../src
   parser: 'google'
-  title: "API"
+  title: "Datasets"
   render_interlinks: true
 
   # # write sidebar data to this file
   sidebar: api/_sidebar.yml
 
   sections:
-  - title: Behaverse Data (Object-Oriented API)
+  - title: Object-Oriented API
     package: behaverse.data
     contents:
       - name: Dataset
@@ -64,7 +64,7 @@ quartodoc:
           - validate
       - name: DatasetDescription
         children: separate
-  - title: Behaverse Data (Functional API)
+  - title: Functional API
     package: behaverse.data
     contents:
       - list_datasets
