@@ -62,7 +62,7 @@ def load_dataset(name: str, **conditions: Any) -> Dataset:
 
 
 def describe_dataset(dataset: Dataset) -> DatasetDescription:
-    """Describe the dataset with the given name.
+    """Describe a dataset and provide its metadata.
 
     Args:
         dataset: Dataset to describe.
