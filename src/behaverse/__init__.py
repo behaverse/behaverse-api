@@ -1,3 +1,3 @@
 """Behaverse package."""
 
-__version__ = '0.0.7-dev1'
+__version__ = '0.0.8-dev1'
