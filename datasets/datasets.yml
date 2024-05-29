@@ -1,5 +1,5 @@
 - name: SRO/Stroop
-  description: Self-Regulation Ontology (Stroop task)
+  description: Self-Regulation Ontology (Stroop)
   download_url: https://example.com
   homepage: https://github.com/poldrack/Self_Regulation_Ontology
   license: CC-BY-4.0
