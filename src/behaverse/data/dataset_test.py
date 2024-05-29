@@ -7,7 +7,9 @@ def test_list_datasets():
     """List available datasets."""
     from .http_storage import list_datasets
     datasets = list_datasets()
-    print(datasets)
+    assert len(datasets) > 0
+    expected_columns = {'name', 'description', 'download_url', 'license'}
+    assert expected_columns.issubset(datasets.columns)
 
 
 def test_download_dataset():
