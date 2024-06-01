@@ -23,7 +23,7 @@ class Dataset():
 
     Args:
         name (str): the name to the dataset file. Use
-                    [](`~behaverse.list_datasets`) to see available datasets.
+                    [](`~behaverse.data.list_datasets`) to see available datasets.
         kwargs (dict): additional arguments.
 
     Raises:
@@ -185,7 +185,7 @@ class Dataset():
         return self
 
     @classmethod
-    def open(cls, name: str, download: bool = True, storage: str='http') -> 'Dataset':
+    def open(cls, name: str, download: bool = True, storage: str = 'http') -> 'Dataset':
         """Open the dataset with the given name, and optionally download it if it does not exist.
 
         Args:
@@ -213,7 +213,7 @@ class Dataset():
     def describe(self) -> DatasetDescription:
         """Provides metadata and information card for the dataset."""
         # TODO add dataset-level attributes
-        description = DatasetDescription()
+        description = DatasetDescription(self.name)
         return description
 
     def validate(self) -> bool:

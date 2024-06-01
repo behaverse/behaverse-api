@@ -3,7 +3,7 @@
 
 def test_download_dataset_functional():
     """Test functional download method."""
-    from behaverse.dvc_storage import download_dataset
+    from behaverse.data.dvc_storage import download_dataset
     path = download_dataset('P500_9subjects/L1m')
 
     assert path.exists()
@@ -13,6 +13,6 @@ def test_download_dataset_functional():
 
 def test_download_dataset_oop():
     """Test object-oriented download method."""
-    from behaverse import Dataset
+    from behaverse.data import Dataset
     dataset = Dataset.open('P500_9subjects/L1m', download=True, storage='dvc')
     assert dataset.validate()

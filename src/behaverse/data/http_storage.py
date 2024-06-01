@@ -1,14 +1,10 @@
-"""Access Behaverse datasets via HTTP(S) protocol.
-
-Currently, the datasets are hosted on Uni.lu OneDrive servers.
-A list of available datasets can be accessed via the following URL: https://edu.lu/g3988
-
-"""
+"""Access Behaverse datasets via HTTP(S) protocol."""
 
 from pathlib import Path
 from tqdm.auto import tqdm
 import pandas as pd
 import requests
+import yaml
 import logging
 from .utils import extract_dataset
 logger = logging.getLogger(__name__)
@@ -20,11 +16,14 @@ def list_datasets() -> pd.DataFrame:
     Returns:
         DataFrame: List of available datasets including name, short description, and url.
 
+    Notes:
+        The list of datasets is stored in a YAML file hosted on GitHub.
+        See [the datasets registry](https://github.com/behaverse/behaverse/tree/Registry/datasets)
+        for more information.
+
     """
-    # use requests to get the list of datasets and parse it using yaml
-    import requests
-    import yaml
-    url = 'https://edu.lu/g3988'  # default url for the list of datasets
+    # default url for the list of datasets
+    url = 'https://raw.githubusercontent.com/behaverse/behaverse/Registry/datasets/datasets.yml'
     response = requests.get(url)
     if response.status_code == 200:
         datasets = pd.DataFrame(yaml.safe_load(response.text))
@@ -50,7 +49,7 @@ def download_dataset(name: str, **kwargs) -> Path:
 
     datasets: pd.DataFrame = list_datasets()
     # query datasets for the url of a row with the given name
-    url = datasets[datasets['name'] == name]['url'].values[0]
+    download_url = datasets[datasets['name'] == name]['download_url'].values[0]
 
     dest = Path(kwargs.get('dest',
                            Path.home() / '.behaverse' / 'datasets' / f'{name}.tar.gz'))
@@ -61,7 +60,7 @@ def download_dataset(name: str, **kwargs) -> Path:
 
     dest.parent.mkdir(parents=True, exist_ok=True)
 
-    with requests.get(url, stream=True) as r:
+    with requests.get(download_url, stream=True) as r:
         r.raise_for_status()
 
         with open(dest, 'wb') as f:

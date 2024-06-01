@@ -7,15 +7,17 @@ def test_list_datasets():
     """List available datasets."""
     from .http_storage import list_datasets
     datasets = list_datasets()
-    print(datasets)
+    assert len(datasets) > 0
+    expected_columns = {'name', 'description', 'download_url', 'license'}
+    assert expected_columns.issubset(datasets.columns)
 
 
 def test_download_dataset():
     """Download a behaverse dataset from a public OneDrive link."""
     # NOTE this commented section is ALT to get one of the available datasets
     # datasets = list_datasets()
-    # url = datasets.query('name == "P500_9subjects/L1m"')['url'].item()
-    # print(url)
+    # download_url = datasets.query('name == "P500_9subjects/L1m"')['download_url'].item()
+    # print(download_url)
 
     from .http_storage import download_dataset
 
@@ -51,5 +53,4 @@ def test_load_dataset_with_condition():
     assert len(dataset.subjects) == len(subject_ids)
     assert len(dataset.study_flow.subject_id.unique()) == len(subject_ids)
 
-    # FIXME subject_index in response table must be renamed to subject_id
-    assert len(dataset.response_table['subject_index'].unique()) == len(subject_ids)
+    assert len(dataset.response_table['subject_id'].unique()) == len(subject_ids)

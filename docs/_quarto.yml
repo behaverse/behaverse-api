@@ -24,6 +24,8 @@ interlinks:
   sources:
     pandas:
       url: https://pandas.pydata.org/docs/
+    python:
+      url: https://docs.python.org/3/
 
 format:
   html:
@@ -38,7 +40,7 @@ metadata-files:
   - api/_sidebar.yml
 
 quartodoc:
-  package: behaverse
+  package: behaverse.data
   dir: api
   source_dir: ../src
   parser: 'google'
@@ -49,28 +51,29 @@ quartodoc:
   sidebar: api/_sidebar.yml
 
   sections:
-  - title: Object-Oriented API
-    package: behaverse
-    contents:
-      - name: Dataset
-        children: separate
-        members:
-          - open
-          - where
-          - describe
-          - load
-          - validate
-      - name: DatasetDescription
-        children: separate
-  - title: Functional API
-    package: behaverse
-    contents:
-      - list_datasets
-      - open_dataset
-      - load_dataset
-      - describe_dataset
-      - validate_dataset
-  - title: Utilities
-    package: behaverse.utils
-    contents:
-      - extract_dataset
+    - title: Datasets API
+    - subtitle: Object-Oriented
+      package: behaverse.data
+      contents:
+        - name: Dataset
+          children: separate
+          members:
+            - open
+            - where
+            - describe
+            - load
+            - validate
+        - name: DatasetDescription
+          children: separate
+    - subtitle: Functional
+      package: behaverse.data
+      contents:
+        - list_datasets
+        - open_dataset
+        - load_dataset
+        - describe_dataset
+        - validate_dataset
+    - subtitle: Utilities
+      package: behaverse.data.utils
+      contents:
+        - extract_dataset
