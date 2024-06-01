@@ -12,7 +12,7 @@ pip install behaverse
 
 ## Usage
 
-See the [Behaverse website](https://behaverse.github.io/) for more information on how to use the package.
+See the [Behaverse website](https://xcit.gitlab.io/behaverse-website) for more information on how to use the package.
 
 ## License
 
