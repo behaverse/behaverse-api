@@ -1,5 +1,5 @@
 project:
-  title: Behaverse
+  title: Behaverse API
   type: website
   execute-dir: project
 
@@ -8,15 +8,15 @@ execute:
 
 website:
   navbar:
-    title: Behaverse
+    title: Behaverse API
     left:
       - getting_started.qmd
-      - api/index.qmd
+      - reference/index.qmd
       - text: Data Model
         href: https://behaverse.github.io/data-model/
     right:
       - icon: github
-        href: https://github.com/behaverse/behaverse/
+        href: https://github.com/behaverse/behaverse-api/
 
 
 interlinks:
@@ -37,18 +37,18 @@ filters:
 
 # tell quarto to read the generated sidebar
 metadata-files:
-  - api/_sidebar.yml
+  - reference/_sidebar.yml
 
 quartodoc:
   package: behaverse.data
-  dir: api
+  dir: reference
   source_dir: ../src
   parser: 'google'
-  title: "API"
+  title: "Reference"
   render_interlinks: true
 
   # # write sidebar data to this file
-  sidebar: api/_sidebar.yml
+  sidebar: reference/_sidebar.yml
 
   sections:
     - title: Datasets API
