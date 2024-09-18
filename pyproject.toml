@@ -9,7 +9,7 @@ testpaths = ["src", "tests"]
 python_files = ["*_test.py", "test_*.py", "tests.py", "test.py"]
 
 [project]
-name = "behaverse"
+name = "behaverse-data-loader"
 authors = [
     {name = "xCIT Development Team", email = "contact@xcit.org"},
 ]
@@ -47,12 +47,12 @@ test = [
 ]
 
 [project.urls]
-Homepage = "https://behaverse.org"
-Documentation = "https://behaverse.github.io"
-Repository = "https://github.com/behaverse/behaverse"
+Homepage = "https://behaverse.org/data"
+Documentation = "https://behaverse.github.io/data-loader"
+Repository = "https://github.com/behaverse/data-loader"
 
 [tools.flit.module]
-name = "behaverse"
+name = "behaverse-data-loader"
 
 [tool.ruff]
 line-length = 120
@@ -70,4 +70,4 @@ docstring-quotes = "double"
 convention = "google"
 
 [tool.codespell]
-ignore-words-list = "behaverse, xcit, p500"
+ignore-words-list = "behaverse, xcit, p500, data-loader"
