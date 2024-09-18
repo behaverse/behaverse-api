@@ -1,18 +1,18 @@
 # Behaverse Python Package
 
-This package is a Python implementation of the Behaverse API. It allows you to interact with the Behaverse datasets in Python.
+The `behaverse-data-loader` package is a Python implementation of the Behaverse Data, enabling seamless access to behavioral datasets in Python.
 
 ## Installation
 
 To install the package, you can use pip:
 
 ```bash
-pip install behaverse
+pip install behaverse-data-loader
 ```
 
 ## Usage
 
-See the [Behaverse website](https://xcit.gitlab.io/behaverse/website) for more information on how to use the package.
+See the [Behaverse website](https://behaverse.org/data) for more information on how to use the package.
 
 ## License
 
