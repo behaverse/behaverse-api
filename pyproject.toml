@@ -51,8 +51,8 @@ Homepage = "https://behaverse.org/data"
 Documentation = "https://behaverse.github.io/data-loader"
 Repository = "https://github.com/behaverse/data-loader"
 
-[tools.flit.module]
-name = "behaverse-data-loader"
+[tool.flit.module]
+name = "behaverse"
 
 [tool.ruff]
 line-length = 120
