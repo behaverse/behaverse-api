@@ -1,6 +1,6 @@
-# Behaverse Python Package
+# Behaverse Data Loader
 
-The `behaverse-data-loader` package is a Python implementation of the Behaverse Data, enabling seamless access to behavioral datasets in Python.
+The data loader package is a Python implementation of the Behaverse Data, enabling seamless access to behavioral datasets in Python.
 
 ## Installation
 
