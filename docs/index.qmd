@@ -1,7 +1,7 @@
 
-# Behaverse
+# Behaverse Data Loader
 
-Behaverse is a Python package to access [xCIT lab](https://xcit.org) datasets in standard [Behaverse Data Model](https://behaverse.org/data/model/) format.
+Behaverse data loader is a Python package to access behavioral datasets in standard [Behaverse Data Model](https://behaverse.org/data/model/) format.
 
 ## System Design
 

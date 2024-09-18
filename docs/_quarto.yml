@@ -1,5 +1,5 @@
 project:
-  title: Behaverse API
+  title: Behaverse Data Loader
   type: website
   execute-dir: project
 
@@ -8,15 +8,15 @@ execute:
 
 website:
   navbar:
-    title: Behaverse API
+    title: Behaverse Data Loader
     left:
       - getting_started.qmd
       - reference/index.qmd
       - text: Data Model
-        href: https://behaverse.github.io/data-model/
+        href: https://behaverse.org/data/
     right:
       - icon: github
-        href: https://github.com/behaverse/behaverse-api/
+        href: https://github.com/behaverse/data-loader/
 
 
 interlinks:
